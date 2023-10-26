@@ -1,4 +1,5 @@
 use rand::{thread_rng, Rng};
+use std::fs::File; //oh no
 
 const UPPERCASE: [&str; 26] = [ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ];
 const LOWERCASE: [&str; 26] = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" ];
@@ -48,10 +49,9 @@ fn main() {
 
     if normalize(external.clone()) == String::from("yes") || normalize(external.clone()) == String::from("y"){
         external_bool = true;
-        println!("external_bool yes");
+        
     } else if normalize(external.clone()) == String::from("no") ||  normalize(external.clone()) == String::from("n"){
         external_bool = false;
-        println!("external_bool no");
     }
 
     println!("\n Do you want to Special cherecters in the password?(yes/no):");
@@ -59,10 +59,8 @@ fn main() {
 
     if normalize(spec_cherecter.clone()) == String::from("yes") ||normalize(spec_cherecter.clone()) == String::from("y"){
         spec_cherecter_bool = true;
-        println!("spec_cherecter_bool Yes");
     } else if normalize(spec_cherecter.clone()) == String::from("no") ||normalize(spec_cherecter.clone()) == String::from("n") {
         spec_cherecter_bool = false;
-        println!("spec_cherecter_bool No");
     }
 
     // println!("\n how many passwords?(int):");
