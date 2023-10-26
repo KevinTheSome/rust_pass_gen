@@ -1,5 +1,6 @@
 use rand::{thread_rng, Rng};
 use std::fs::File; //oh no
+use std::fs; 
 
 const UPPERCASE: [&str; 26] = [ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ];
 const LOWERCASE: [&str; 26] = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" ];
@@ -36,6 +37,12 @@ fn non_spec_char_gen() -> String {
     }
 }
 
+fn write_to_file(input_string:String) -> std::io::Result<()> {
+    File::create("password.txt")?;
+    fs::write("password.txt",input_string)?;
+    Ok(())
+}
+
 fn main() {
     let mut how_many: i32 = 0;
     let mut how_long: i32 = 0;
@@ -49,7 +56,7 @@ fn main() {
 
     if normalize(external.clone()) == String::from("yes") || normalize(external.clone()) == String::from("y"){
         external_bool = true;
-        
+
     } else if normalize(external.clone()) == String::from("no") ||  normalize(external.clone()) == String::from("n"){
         external_bool = false;
     }
@@ -71,12 +78,14 @@ fn main() {
 
     
     //main gen stuff
+    let mut buffer:String = String::new();
     if external_bool == true{
         if spec_cherecter_bool == true{
-            spec_char_gen();
+            buffer = spec_char_gen();
         }else{
             non_spec_char_gen();
         }
+        let _ = write_to_file(buffer);
 
     }else{
         if spec_cherecter_bool == true{
